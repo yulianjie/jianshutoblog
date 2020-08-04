@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于简书的个人博客</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script> -->
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <script src="blogtime.js"></script>
+    <script>
+        $(document).ready(function() {
+            // console.log("开始加载");
+            $("#yiyan").load("https://v1.hitokoto.cn/?c=f&encode=text");
+            $("#main").load("jianshu1.html");
+        });
+
+        Function.prototype.getMultiLine = function() {
+            var lines = new String(this);
+            lines = lines.substring(lines.indexOf("/*") + 3, lines.lastIndexOf("*/"));
+            return lines;
+        }
+
+        var string = function() {
+                /*
+
+    ___          ___           ___           ___     
+   /  /\        /  /\         /  /\         /__/|    
+  /  /:/       /  /::\       /  /:/        |  |:|    
+ /__/::\      /  /:/\:\     /  /:/         |  |:|    
+ \__\/\:\    /  /:/~/::\   /  /:/  ___   __|  |:|    
+    \  \:\  /__/:/ /:/\:\ /__/:/  /  /\ /__/\_|:|____
+     \__\:\ \  \:\/:/__\/ \  \:\ /  /:/ \  \:\/:::::/
+     /  /:/  \  \::/       \  \:\  /:/   \  \::/~~~~ 
+    /__/:/    \  \:\        \  \:\/:/     \  \:\     
+    \__\/      \  \:\        \  \::/       \  \:\    
+                \__\/         \__\/         \__\/    
+
+            */
+            }
+            // 来自http://www.network-science.de/ascii/
+        window.console.log(string.getMultiLine());
+    </script>
+    <style>
+        .content {
+            margin: 10px auto;
+            width: 90%;
+            display: flex;
+        }
+        
+        .list-group-item {
+            border: 0px;
+        }
+        
+        #donate {
+            width: 150px;
+            height: 150px;
+        }
+        
+        .card-footer {
+            background-color: #fff;
+        }
+        
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="nav-link active" href="#">
+            <img src="./img/logo_black.png" alt="" class="rounded float-left">
+        </a>
+
+        <a class="navbar-brand" href="/">JackYu博客</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="about">About</a>
+                </li>
+            </ul>
+            <!-- 调用一言接口的一句话 -->
+            <span class="navbar-text" id="yiyan">
+                调用一言接口的一句话
+            </span>
+        </div>
+    </nav>
+
+    <!-- 正文内容，采用ajax加载 -->
+    <div class="content">
+        <div class="row row-cols-1 row-cols-md-3" id="main"></div>
+    </div>
+    <script>
+        $("#main").load("jianshu" + 1 + ".html");
+    </script>
+    <!-- 加载更多 -->
+    <div class="text-center">
+        <a class="more">点击加载更多</a>
+        <div class="hide" id="pagenums"></div>
+        <div class="hide" id="hide">hide</div>
+        <script>
+            $("#pagenums").load("num.txt", function(responseTxt, statusTxt, xhr) {
+                if (statusTxt == "success") {
+                    var nums = $("#pagenums").html();
+                    console.log(nums);
+                    var pagenum = 2;
+                    var tex;
+                    $(".more").click(function() {
+                        $("#hide").load("jianshu" + pagenum + ".html", function(responseTxt, statusTxt,
+                            xhr) {
+                            if (statusTxt == "success") {
+                                tex = $("#hide").html();
+                                $("#main").append(tex);
+                                // console.log(tex);
+                                if (pagenum == Number(nums)) {
+                                    $(".more").text("没有更多了");
+                                }
+                                pagenum += 1;
+                            }
+                        });
+                    });
+                }
+            });
+        </script>
+    </div>
+    <!-- 页脚部分 -->
+    <div class="card text-center">
+
+        <div class="card-footer text-muted">
+            <!-- 显示博客运行时间 -->
+            <li class="list-group-item"><a> 博客运行时间：<span id="htmer_time" style="color: #888;"></span></a></li>
+            <!-- 网站备案 -->
+            <li class="list-group-item"><a href="http://beian.miit.gov.cn/">赣ICP备18005044号-1</a></li>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
