@@ -97,9 +97,11 @@ def getText(csrf, url):
 
 # download img to img folder
 def downloadimg(url,i):
+    print('正在下载图片' + str(i)+'...')
     r = requests.get(url)
     with open('./img/img'+str(i)+'.jpg', 'wb') as f:
         f.write(r.content)
+        print('下载图片成功')
 
 def writeText(article):
     # 写入总页数
@@ -119,15 +121,17 @@ def writeText(article):
         # print("---")
         art[3] = art[3].replace('\n', '')
         art[3] = art[3].replace(' ', '')
+        art[1] = art[1].replace('/h/240', '/h/180')
         if art[1][1] == '/':
             art[1] = art[1].replace('//', 'https://')
+        # print(art[1])
         downloadimg(art[1],i)
         tex = tex + '''
 <div class="col mb-4">
     <div class="card h-100">
         <img src="./img/img{}.jpg" class="card-img-top" alt="img">
         <div class="card-body">
-            <a href="https://www.jianshu.com{}">
+            <a href="https://www.jianshu.com{}" target="_blank">
                 <h5 class="card-title">{}</h5>
             </a>
             <p class="card-text">{}</p>
