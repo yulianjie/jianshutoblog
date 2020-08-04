@@ -19,6 +19,14 @@
 
 * 最后部署到服务器的时候，可以写一个定时任务执行`jiansshuspideer.py`。
 
+* 最后的博客运行时间请`blogtime.js`文件30行中的内容
+
+  ```javascript
+  var create_time = Math.round(new Date(Date.UTC(2020, 6, 28, 18, 0, 0))
+  ```
+
+  这里面的月份比较特殊，是从0开始的，如这里的6代表7月。
+
 ## TODO
 
 1.突然想起来还没加上文章写作时间，下次吧
