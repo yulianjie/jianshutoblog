@@ -9,7 +9,7 @@
 
 ## 使用
 
-* 修改img文件夹中的logo_black.png为你自己的logo图片。
+* 修改img文件夹中的logo_black.png,logo.ico为你自己的logo图片。
 
 * 在`jiansshuspideer.py`中151行修改url为你的简书主页url，然后执行。
 
