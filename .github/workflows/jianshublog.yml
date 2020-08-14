@@ -17,6 +17,7 @@ jobs:
         python-version: 3.7
     - name: spider
       run: |
+        pip3 install requests
         python3 jiansshuspideer.py
     - name: commit
       run: |
