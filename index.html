@@ -54,6 +54,7 @@
     <style>
         .content {
             margin: 10px auto;
+            margin-top: 40px;
             width: 90%;
             display: flex;
         }
@@ -74,6 +75,16 @@
         .hide {
             display: none;
         }
+        
+        .content .card {
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 10px 10px 20px #c2c2c2, -10px -10px 20px #ffffff;
+        }
+        
+        .content .card img {
+            border-radius: 8px 8px 0 0;
+        }
     </style>
 </head>
 
@@ -82,10 +93,10 @@
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="nav-link active" href="#">
-            <img src="./img/logo_black.png" alt="" class="rounded float-left">
+            <img src="./img/logo_white.png" alt="" class="rounded float-left">
         </a>
 
-        <a class="navbar-brand" href="/">JackYu博客</a>
+        <!-- <a class="navbar-brand" href="/">JackYu博客</a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
