@@ -9,7 +9,9 @@
 
 ## 使用
 
-* 修改img文件夹中的logo_black.png,logo.ico为你自己的logo图片。
+### 修改
+
+* 修改img文件夹中的logo_white.png,logo.ico为你自己的logo图片。
 
 * 在`jiansshuspideer.py`中151行修改url为你的简书主页url，然后执行。
 
@@ -26,6 +28,48 @@
   ```
 
   这里面的月份比较特殊，是从0开始的，如这里的6代表7月。
+
+### 使用github的action自动爬取
+
+具体请看注释
+
+```yml
+name: jianshutoblog
+
+on: #每一次提交或者每天早上5点开始爬取
+  push:
+  schedule:
+    - cron: '0 21 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #一般来说使用Ubuntu最新版本没说什么问题
+    steps:
+    - name: checkout actions
+      uses: actions/checkout@v1
+    - name: Set up Python 3.7 # 使用Python3.7的环境
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: spider
+      run: | #安装requests库并执行Python文件
+        pip3 install requests
+        python3 jiansshuspideer.py
+    - name: commit
+      run: |
+        git config --global user.email jackyu0915@gmail.com #改成你的邮箱
+        git config --global user.name JackietYu #改成你的用户名
+        git add .
+        git commit -m "Everyday update" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+
+
+
 
 ## TODO
 
