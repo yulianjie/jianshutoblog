@@ -84,7 +84,7 @@ def getText(csrf, url):
             break
         # print(htmlContent)
         article = re.findall(
-            '<a class="wrap-img" href="(.*?)" target="_blank">.*?data-echo="(.*?)".*?<a class="title" target="_blank" href=".*?">(.*?)</a>.*?<p class="abstract">(.*?)</p>',
+            '<a class="wrap-img" href="(.*?)" target="_blank">.*?data-echo="(.*?)".*?<a class="title" target="_blank" href=".*?">(.*?)</a>.*?<p class="abstract">(.*?)</p>.*?data-shared-at="(\d{4}-\d\d-\d\d)',
             htmlContent, re.S)
 
         content.extend(article)
@@ -129,16 +129,19 @@ def writeText(article):
         tex = tex + '''
 <div class="col mb-4">
     <div class="card h-100">
-        <img src="./img/img{}.jpg" class="card-img-top" alt="img">
+        <a href="https://www.jianshu.com{}" target="_blank">
+            <img src="./img/img{}.jpg" class="card-img-top" alt="img">
+        </a>
         <div class="card-body">
             <a href="https://www.jianshu.com{}" target="_blank">
-                <h5 class="card-title">{}</h5>
+                <h5 class="card-title">{}</h5> 
             </a>
             <p class="card-text">{}</p>
+            <p class="card-text"><small class="text-muted">{}</small></p>
         </div>
     </div>
 </div>
-'''.format(i, art[0], art[2], art[3])
+'''.format(art[0],i, art[0], art[2],art[3], art[4])
         i += 1
         if i % 9 == 0:
             f.write(tex)
