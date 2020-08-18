@@ -6,7 +6,7 @@ on:
     - cron: '0 21 * * *'
 
 jobs:
-  build:
+  commit:
     runs-on: ubuntu-latest
     steps:
     - name: checkout actions
