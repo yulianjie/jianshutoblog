@@ -1,6 +1,8 @@
 name: jianshutoblog
 
 on:
+  watch:
+    types: started
   push:
   schedule:
     - cron: '0 21 * * *'
