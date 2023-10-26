@@ -20,7 +20,7 @@ jobs:
     - name: spider
       run: |
         pip3 install requests
-        python3 jiansshuspideer.py
+        python3 getInfoFromJianshuApi.py
     - name: commit
       run: |
         git config --global user.email jackyu0915@gmail.com
