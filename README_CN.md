@@ -19,7 +19,7 @@
 * 在`getInfoFromJianshuApi.py`中151行修改url为你的简书主页url，然后执行。
 
   ```shell
-  python3 jiansshuspideer.py
+  python3 getInfoFromJianshuApi.py
   ```
 
 * 最后部署到服务器的时候，可以写一个定时任务执行`getInfoFromJianshuApi.py`。
