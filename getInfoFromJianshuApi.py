@@ -116,12 +116,12 @@ def writeText(article_info):
 <div class="col mb-4">
     <div class="card h-100">
         <div class="img-box">
-        <a href="https://www.jianshu.com/{}" target="_blank">
+        <a href="https://www.jianshu.com/p/{}" target="_blank">
             <img src="{}" class="card-img-top" alt="img">
         </a>
         </div>
         <div class="card-body">
-            <a href="https://www.jianshu.com/{}" target="_blank">
+            <a href="https://www.jianshu.com/p/{}" target="_blank">
                 <h5 class="card-title">{}</h5> 
             </a>
         </div>
